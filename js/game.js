@@ -2,8 +2,9 @@
 /*
 class LiveScenario {
     constructor() {
+        this.playerID = ""
         this.scenID = "";
-        // this.selected = "";
+        this.selected = "";
     }
 
     setScenario(ID) {
@@ -18,6 +19,10 @@ class LiveScenario {
             // Will likely by a function implemented in "api.js".
             pointSum += getPoints(this.scenID, selections[i]);
         }
+    }
+
+    addResults() {
+        //
     }
 }
 // The following should probably go into the HTML file.
