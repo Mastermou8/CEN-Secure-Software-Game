@@ -25,15 +25,11 @@ header {
 	line-height: 1.15;
 }
 
-form {
+.menu-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	margin-top: 96px;
-}
-
-form:first-of-type {
-	margin-top: 0;
-}
-
-button {
 	width: min(100%, 392px);
 	min-height: 74px;
 	padding: 16px 28px;
@@ -46,7 +42,11 @@ button {
 	text-decoration: underline;
 }
 
-button:hover {
+.menu-link:first-of-type {
+	margin-top: 0;
+}
+
+.menu-link:hover {
 	background: #ffd36a;
 }
 
@@ -55,11 +55,9 @@ button:hover {
 		padding: 22px;
 	}
 
-	form {
+	.menu-link {
+		font-size: 1.5rem;
 		margin-top: 38px;
-	}
-
-	button {
 		font-size: 1.5rem;
 		min-height: 62px;
 	}
