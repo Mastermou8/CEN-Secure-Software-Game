@@ -3,6 +3,49 @@ const GameAPI = (() => {
     const SELECTION_KEY = "architecture-design-game-selection";
     const DATA_PATH = "../data/scenarios.json";
 
+    function getAvailableStorages() {
+        const storages = [];
+
+        [window.localStorage, window.sessionStorage].forEach((storage) => {
+            try {
+                const probeKey = "architecture-design-game-probe";
+                storage.setItem(probeKey, "1");
+                storage.removeItem(probeKey);
+                storages.push(storage);
+            } catch (error) {
+                // Ignore unavailable browser storage providers.
+            }
+        });
+
+        return storages;
+    }
+
+    function writeToStorages(key, value) {
+        const serializedValue = JSON.stringify(value);
+
+        getAvailableStorages().forEach((storage) => {
+            storage.setItem(key, serializedValue);
+        });
+    }
+
+    function readFromStorages(key) {
+        for (const storage of getAvailableStorages()) {
+            const rawValue = storage.getItem(key);
+
+            if (rawValue) {
+                return rawValue;
+            }
+        }
+
+        return null;
+    }
+
+    function removeFromStorages(key) {
+        getAvailableStorages().forEach((storage) => {
+            storage.removeItem(key);
+        });
+    }
+
     async function fetchScenarios() {
         if (typeof window !== "undefined" && window.SCENARIO_DATA) {
             return window.SCENARIO_DATA;
@@ -18,11 +61,11 @@ const GameAPI = (() => {
     }
 
     function saveState(state) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        writeToStorages(STORAGE_KEY, state);
     }
 
     function loadState() {
-        const rawState = localStorage.getItem(STORAGE_KEY);
+        const rawState = readFromStorages(STORAGE_KEY);
 
         if (!rawState) {
             return null;
@@ -31,21 +74,21 @@ const GameAPI = (() => {
         try {
             return JSON.parse(rawState);
         } catch (error) {
-            localStorage.removeItem(STORAGE_KEY);
+            removeFromStorages(STORAGE_KEY);
             return null;
         }
     }
 
     function clearState() {
-        localStorage.removeItem(STORAGE_KEY);
+        removeFromStorages(STORAGE_KEY);
     }
 
     function saveScenarioSelection(scenarioIds) {
-        localStorage.setItem(SELECTION_KEY, JSON.stringify(scenarioIds));
+        writeToStorages(SELECTION_KEY, scenarioIds);
     }
 
     function loadScenarioSelection() {
-        const rawSelection = localStorage.getItem(SELECTION_KEY);
+        const rawSelection = readFromStorages(SELECTION_KEY);
 
         if (!rawSelection) {
             return null;
@@ -55,13 +98,13 @@ const GameAPI = (() => {
             const parsedSelection = JSON.parse(rawSelection);
             return Array.isArray(parsedSelection) ? parsedSelection : null;
         } catch (error) {
-            localStorage.removeItem(SELECTION_KEY);
+            removeFromStorages(SELECTION_KEY);
             return null;
         }
     }
 
     function clearScenarioSelection() {
-        localStorage.removeItem(SELECTION_KEY);
+        removeFromStorages(SELECTION_KEY);
     }
 
     return {
