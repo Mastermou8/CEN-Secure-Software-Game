@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #3b5948;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+.tutorial-shell {
+  display: grid;
+  min-height: 100vh;
+  padding: 36px 18px;
+  place-items: center;
+}
+
+.tutorial-frame {
+  display: grid;
+  gap: 18px;
+  justify-items: center;
+}
+
+.tutorial-video {
+  aspect-ratio: 16 / 9;
+  background:
+    linear-gradient(180deg, rgba(203, 95, 181, 0.85), rgba(217, 226, 255, 0.82) 52%, rgba(255, 255, 255, 0.65)),
+    repeating-linear-gradient(170deg, rgba(255, 255, 255, 0.18) 0 18px, rgba(113, 161, 198, 0.18) 18px 36px);
+  border-radius: 2px;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.14);
+  width: min(100%, 800px);
+}
+
+.back-button {
+  background: #ffe090;
+  border-radius: 12px;
+  color: #111;
+  display: inline-flex;
+  font-size: clamp(1.8rem, 4vw, 2.1rem);
+  justify-content: center;
+  min-width: 394px;
+  padding: 18px 42px;
+  text-decoration: underline;
+}
+
+.back-button:hover {
+  background: #ffd36a;
+}
+
+@media (max-width: 720px) {
+  .back-button {
+    min-width: 0;
+    width: 100%;
+  }
+}

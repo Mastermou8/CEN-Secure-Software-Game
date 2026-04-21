@@ -1,1 +1,310 @@
-//
+{
+	"meta": {
+		"title": "Architecture Design Game",
+		"description": "A browser-based security architecture game that teaches players to choose secure design decisions.",
+		"scoreKey": {
+			"optimal": 1,
+			"acceptable": 0.5,
+			"insecure": 0
+		},
+		"maxScore": 10
+	},
+	"scenarios": [
+		{
+			"id": "online-shopping",
+			"title": "Online Shopping Architecture",
+			"summary": "A local retail store wants to launch an online shopping application for delivery and product browsing.",
+			"requirements": [
+				"Prevent unauthorized users from easily logging into customer accounts.",
+				"Safeguard user payment information.",
+				"Handle high network traffic securely.",
+				"Secure user authentication during purchases."
+			],
+			"parts": [
+				{
+					"id": "authentication-mechanism",
+					"title": "Authentication Mechanism",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Multi-Factor Authentication Login",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Adds a strong extra layer against unauthorized access, even if it reduces convenience."
+						},
+						{
+							"id": "b",
+							"label": "Voice-recognized Login",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Improves security over a password alone, but can be bypassed with a convincing voice recording."
+						},
+						{
+							"id": "c",
+							"label": "Single Password-based Login",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "A single password does not provide strong protection against unauthorized logins."
+						}
+					]
+				},
+				{
+					"id": "user-data-encryption",
+					"title": "User Data Encryption Methods",
+					"choices": [
+						{
+							"id": "a",
+							"label": "HTTPS",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Protects data in transit and is the correct baseline for web application traffic."
+						},
+						{
+							"id": "b",
+							"label": "Simple HTTP",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "HTTP sends data without transport encryption, exposing sensitive information in transit."
+						},
+						{
+							"id": "c",
+							"label": "Triple DES",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Stronger than plaintext but outdated compared with modern web transport encryption standards."
+						}
+					]
+				},
+				{
+					"id": "app-data-storage",
+					"title": "App Data Storage",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Hashed Password plus Bcrypt",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Password hashing with bcrypt protects stored credentials far better than saving raw values."
+						},
+						{
+							"id": "b",
+							"label": "Binary Encryption",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Encryption is better than plaintext, but this choice is vague and weaker than strong password hashing practices."
+						},
+						{
+							"id": "c",
+							"label": "Plain English Text",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "Plaintext storage leaves sensitive data directly readable to attackers."
+						}
+					]
+				},
+				{
+					"id": "access-control-model",
+					"title": "Access Control Model",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Role-Based Access Control",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "RBAC fits this application by separating customer and employee capabilities cleanly."
+						},
+						{
+							"id": "b",
+							"label": "Attribute-Based Access Control",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Flexible, but easier to misconfigure for a simpler retail application than RBAC."
+						},
+						{
+							"id": "c",
+							"label": "Rule-Based Access Control",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "Static rules alone are a poor fit here and can become restrictive without improving security enough."
+						}
+					]
+				},
+				{
+					"id": "logging-strategies",
+					"title": "Logging Strategies",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Centralized Logging plus Alerts",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Centralized monitoring and alerts improve detection, response, and troubleshooting."
+						},
+						{
+							"id": "b",
+							"label": "Structured Logging",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Useful for machine-readable analysis, but less complete than centralized monitoring with alerts."
+						},
+						{
+							"id": "c",
+							"label": "No Logging",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "Without logs, security incidents and operational failures are harder to detect and investigate."
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "hospital-information-database",
+			"title": "Hospital Information Database",
+			"summary": "A local hospital manages sensitive patient records and must comply with state privacy laws.",
+			"requirements": [
+				"Protect confidential patient data from attackers.",
+				"Ensure data availability in life-critical situations.",
+				"Maintain audit trails for system activity."
+			],
+			"parts": [
+				{
+					"id": "login-authentication",
+					"title": "Login Authentication",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Smart Cards plus Biometrics",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Combines possession and biometric factors for strong authentication in a sensitive environment."
+						},
+						{
+							"id": "b",
+							"label": "Password-Based",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "A password alone is too weak for protecting highly sensitive medical records."
+						},
+						{
+							"id": "c",
+							"label": "Certificate-Based",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Stronger than passwords alone, but does not match the layered assurance of smart cards plus biometrics."
+						}
+					]
+				},
+				{
+					"id": "patient-data-encryption",
+					"title": "Patient Data Encryption",
+					"choices": [
+						{
+							"id": "a",
+							"label": "End-to-End Encryption",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Provides the strongest protection so only intended communicating parties can read sensitive data."
+						},
+						{
+							"id": "b",
+							"label": "Partial Encryption",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Better than none, but it still leaves portions of patient data exposed."
+						},
+						{
+							"id": "c",
+							"label": "Virtual Private Network",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "A VPN protects traffic paths but is not a substitute for direct patient data encryption."
+						}
+					]
+				},
+				{
+					"id": "hospital-access-control",
+					"title": "Access Control Model",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Attribute-Based Access Control",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "ABAC supports contextual decisions for staff, device, and environment in a hospital setting."
+						},
+						{
+							"id": "b",
+							"label": "Policy-Based Access Control",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Useful, but less adaptive than full attribute-based decisions for sensitive medical access."
+						},
+						{
+							"id": "c",
+							"label": "Mandatory Access Control",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "Highly rigid controls are a poor fit here and can obstruct urgent care workflows without improving outcomes enough."
+						}
+					]
+				},
+				{
+					"id": "data-backup-strategy",
+					"title": "Data Backup Strategy",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Encrypted Backup",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Protects backup copies while preserving availability for recovery during critical events."
+						},
+						{
+							"id": "b",
+							"label": "Incremental Backup",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Helpful for recovery, but the scenario description treats it as weaker protection than fully encrypted backups."
+						},
+						{
+							"id": "c",
+							"label": "No backups needed",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "No backups leave life-critical data at risk of permanent loss after attack or failure."
+						}
+					]
+				},
+				{
+					"id": "hospital-logging-strategy",
+					"title": "Logging Strategy",
+					"choices": [
+						{
+							"id": "a",
+							"label": "Full Audit Logging",
+							"rating": "optimal",
+							"points": 1,
+							"feedback": "Complete audit trails support accountability, incident review, and regulatory compliance."
+						},
+						{
+							"id": "b",
+							"label": "Centralized Logging",
+							"rating": "acceptable",
+							"points": 0.5,
+							"feedback": "Centralized logs help operations, but full audit logging is the stronger fit for healthcare compliance."
+						},
+						{
+							"id": "c",
+							"label": "Partial Logging",
+							"rating": "insecure",
+							"points": 0,
+							"feedback": "Incomplete records make investigation and accountability unreliable during a breach or misuse event."
+						}
+					]
+				}
+			]
+		}
+	]
+}
+
