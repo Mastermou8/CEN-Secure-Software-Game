@@ -1,10 +1,11 @@
 //game logic
 /*
 class LiveScenario {
-    constructor() {
-        this.playerID = ""
+    constructor(playID) {
+        this.playerID = playID;
         this.scenID = "";
-        this.selected = "";
+        this.selected = [];
+        this.score = 0.0;
     }
 
     setScenario(ID) {
@@ -13,16 +14,22 @@ class LiveScenario {
 
     calculateScore(selections) {
         var pointSum = 0.0;
-        // temp1: the number of components that the user selected.    
+        // temp1: The number of components that the user selected.    
         for (var i = 0; i < temp1; i++) {
-            // getSelectPoints(ID, selection): returns the points associated with the selection based on the specified scenario.
-            // Will likely by a function implemented in "api.js".
+            this.selected.push(selections[i]);
+            // getSelectPoints(ID, selection): Returns the points associated with the selection based on the specified scenario.
+            // Will likely be a function implemented in "api.js".
             pointSum += getPoints(this.scenID, selections[i]);
         }
+        // getPoints(scenarioID): Returns the maximum amount of point that can be gotten for the specified scenario.
+        // Will likely be a function implemented in "api.js".
+        this.score = (pointSum/getMaxPoints(this.scenID)*100.0);
     }
 
-    addResults() {
-        //
+    addResultsToUser() {
+        // addCompletedScenario(...): Adds an entry to a table that will store completed scenarios.
+        // Will likely be a function implemented in "api.js".
+        addCompletedScenario(this.playerID, this.scenID, this.selected, this.score);
     }
 }
 // The following should probably go into the HTML file.
