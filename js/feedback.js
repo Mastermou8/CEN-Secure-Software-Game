@@ -1,11 +1,11 @@
 // feedback
-/*
+// api: The variable name for the api object. Will be made in the HTML file.
 class feedback {
     constructor() {
         this.playerID = "";
         this.scenID = "";
     }
-
+    
     playerSelectHandle(playID) {
         this.playerID = playID;
     }
@@ -16,8 +16,7 @@ class feedback {
     
     feedbackHandle(feedback) {
         // addFeedback(feedback): Edits an entry to the aformentioned table to add feedback.
-        // Will likely be a function implemented in "api.js".
-        addFeedback(feedback);
+        api.addFeedback(feedback);
     }
 
     // f: The variable name for the feedback object. Will be made in the HTML file.
@@ -34,4 +33,3 @@ class feedback {
         f.feedbackHandle(this);
     }
 }
-*/
