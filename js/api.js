@@ -29,6 +29,11 @@ class API {
         //
     }
 
+    // Edits an entry to the aformentioned table to add feedback.
+    addFeedback(feedback) {
+        //
+    }
+
     // Checks to see if the given username and password exist in the database. Returns true if they are.
     checkUsernamePassword(username, password) {
         //

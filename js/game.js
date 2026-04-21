@@ -14,7 +14,8 @@ class LiveScenario {
 
     calculateScore(selections) {
         var pointSum = 0.0;
-        // temp1: The number of components that the user selected.    
+        // temp1: The number of components that the user selected.
+        // Will need to properly implement.
         for (var i = 0; i < temp1; i++) {
             this.selected.push(selections[i]);
             // getSelectPoints(ID, selection): Returns the points associated with the selection based on the specified scenario.
