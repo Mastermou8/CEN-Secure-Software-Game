@@ -16,5 +16,11 @@
         "username": "admin101",
         "password": "admin123",
         "account_type": "admin"
+    },
+      {
+        "userID": 4,
+        "username": "Mou@iamme.com",
+        "password": "pasword",
+        "account_type": "player"
     }
 ]
