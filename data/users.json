@@ -1,0 +1,20 @@
+[
+    {
+        "userID": 1,
+        "username": "player101",
+        "password": "g4meTim3",
+        "account_type": "player"
+    },
+    {
+        "userID": 2,
+        "username": "MouJN",
+        "password": "pasword",
+        "account_type": "player"
+    },
+    {
+        "userID": 3,
+        "username": "admin101",
+        "password": "admin123",
+        "account_type": "admin"
+    }
+]
